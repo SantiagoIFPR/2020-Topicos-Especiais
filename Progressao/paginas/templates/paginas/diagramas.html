@@ -1,0 +1,76 @@
+{% extends 'paginas/modelo.html' %}
+
+{% load static %}
+
+{% block titulo %}
+<title>Sobre</title>
+{% endblock %}
+
+{% block slide %}
+<div class="card mb-4">
+    <h1 class="my-4">Diagrama de Classes
+    </h1>
+    <div class="card-body">
+        <p class="card-text" align="justify">O sistema para controle de estoque trata do gerenciamento de produtos
+            dentro do almoxarifado. É um sistema voltado para o controle de estoque de supermercados, onde existem
+            diversos itens perecíveis, ele trata o gerenciamento das saídas pelos itens com vencimentos mais próximos.
+            O gerenciamento é realizado de forma rápida e eficaz, o que diminui o erro humano na manipulação dos
+            produtos dentro do estoque, assim tornando o processo mais eficiente. O sistema tem controle sobre a saída,
+            entrada e cadastro dos produtos, e emitem diversos tipos de relatórios, esses relatórios possuem diversas
+            informações sobre os produtos e suas condições, tais como: restante de dias para o vencimento, produto
+            vencido,
+            data de entrada do produto, quantidade disponível de produto e de cada entrada do mesmo, solicitações
+            pendentes
+            e solicitações atendidas. Com essas informações o usuário pode fazer uma manutenção preventiva dos produtos,
+            o
+            que evita a perda de produtos.
+        </p>
+    </div>
+    <img class="card-img-top" src="{% static 'img/diagrama de classe.jpeg'%}" alt="Card image cap">
+    <div class="card-body">
+        <p class="card-text" align="justify">No diagrama de classes podemos apresentar as classes a serem implementadas
+            no sistema,
+            onde temos o cadastro de funcionário, fornecedor, pedido, itens do pedido, produto, categoria, unidade de
+            medida,
+            solicitação, entrada e saída. <br><br>
+            Um fornecedor pode estar em nenhum ou muitos pedidos, mas um pedido deve obrigatóriamente conter um
+            funcionário. <br><br>
+            Um pedido pode conter nenhum ou muitos itens do pedidos, mas um item deve estar obrigatóriamente em um
+            pedido. <br><br>
+            Um item do pedido deve pertencer a exatamente 1 produto. Um produto pode estar em 0 ou muitos itens do
+            pedido. <br><br>
+            Um produto deve ter exatamente uma categoria, mas uma categoria pode estar em nenhum ou muitos produtos.
+            <br><br>
+            Um produto deve ter exatamente uma unidade de medida, mas uma unidade de medida pode estar em nenhum ou
+            muitos produtos. <br><br>
+            Um funcionário pode estar em 0 ou muitas solicitações mas uma solicitação deve conter exatamente 1
+            funcionário. <br><br></p>
+    </div>
+    <h1 class="my-4">Diagrama de Caso de Uso
+    </h1>
+    <img class="card-img-top" src="{% static 'img/diagrama de caso de uso.jpeg'%}" alt="Card image cap">
+    <div class="card-body">
+        <p class="card-text" align="justify">Ator: Funcionário, será o único ator existente. <br><br>
+            Cadastrar Produto: O ator irá selecionar o menu do sistema o cadastro
+            de produtos, e também irá informar a unidade de medida e a categoria do mesmo.
+            Ao concluir o ator confirma os dados e finaliza a operação. <br><br>
+            Cadastrar Solicitação de Compra: O ator irá selecionar a opção de solicitação de compra
+            informa a data que esta sendo solicitada, a quantidade solicitada e a data de atendimento do fornecedor.
+            <br><br>
+            Cadastrar Entrada: O ator irá realizar a entrada da compra no sistema preenchendo a data de entrada,
+            quantidade de entrada, validade do produto e quantidade disponível. <br><br>
+            Cadastrar Saída: O ator irá realizar a saída da mercadoria no sistema preenchendo a quantidade de saída,
+            a data de retirada e a quantidade disponível. <br><br>
+            Cadastrar Fornecedor: O ator irá entrar no menu de cadastros e selecionar a opção de cadastro de
+            fornecedores
+            no sistema e logo após inserir as informações pertinentes. <br><br>
+            Cadastrar Pedido: O ator irá entrar no menu de movimentações e cadastrar o pedido junto com os itens do
+            pedido
+            que deverão estarem unificados.
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+{% block conteudo%}
+{% endblock%}
