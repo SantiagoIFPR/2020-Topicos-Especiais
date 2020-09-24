@@ -1,0 +1,37 @@
+{% extends 'paginas/modelo.html' %}
+
+{% load static %}
+
+{% block slide %}
+<p></p><br>
+<h3>Lista de Funcionários Cadastrados</h3>
+<a href="{% url 'cadastrar-funcionario' %}" class="btn btn-primary btn-sm">Adicionar Funcionário</a>
+<hr>
+<div class="table responsive">
+    <table class="table table striped">
+        <tr>
+            <th>Nome</th>
+            <th>Setor Funcionário</th>
+            <th>Opções</th>
+        </tr>
+
+        {% for funcionario in object_list %} 
+        <tr>
+            <td>{{ funcionario.nome_funcionario }}</td>
+            <td>{{ funcionario.setor_funcionario }}</td>
+            <td>
+                <a href="{% url 'editar-funcionario' funcionario.pk %}" class="btn btn-warning btn-sm" title="Excluir">Editar</a>
+                <a href="{% url 'excluir-funcionario' funcionario.pk%}" class="btn btn-danger btn-sm" title="Editar">Excluir</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">Nenhum campo registrado.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
+{% block conteudo %}
+<p></p>
+{% endblock %}

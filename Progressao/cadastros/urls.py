@@ -3,6 +3,8 @@ from django.urls import path
 # Importa as views que a gente criou 
 from .views import CategoriaCreate, FornecedorCreate, FuncionarioCreate, ProdutoCreate, UnidadeMedidaCreate
 from .views import CategoriaUpdate, FornecedorUpdate, FuncionarioUpdate, ProdutoUpdate, UnidadeMedidaUpdate
+from .views import CategoriaDelete, FornecedorDelete, FuncionarioDelete, ProdutoDelete, UnidadeMedidaDelete
+from .views import CategoriaList, FornecedorList, FuncionarioList, ProdutoList, UnidadeMedidaList
 
 # Tem que ser urlpatterns porque é padrão do Django
 urlpatterns = [
@@ -18,4 +20,16 @@ urlpatterns = [
     path('editar/funcionario/<int:pk>/', FuncionarioUpdate.as_view(), name='editar-funcionario'),
     path('editar/produto/<int:pk>/', ProdutoUpdate.as_view(), name='editar-produto'),
     path('editar/unidademedida/<int:pk>/', UnidadeMedidaUpdate.as_view(), name='editar-unidademedida'),
+
+    path('excluir/categoria/<int:pk>/', CategoriaDelete.as_view(), name='excluir-categoria'),
+    path('excluir/fornecedor/<int:pk>/', FornecedorDelete.as_view(), name='excluir-fornecedor'),
+    path('excluir/funcionario/<int:pk>/', FuncionarioDelete.as_view(), name='excluir-funcionario'),
+    path('excluir/produto/<int:pk>/', ProdutoDelete.as_view(), name='excluir-produto'),
+    path('excluir/unidademedida/<int:pk>/', UnidadeMedidaDelete.as_view(), name='excluir-unidademedida'),
+
+    path('listar/categoria/', CategoriaList.as_view(), name='listar-categoria'),
+    path('listar/fornecedor/', FornecedorList.as_view(), name='listar-fornecedor'),
+    path('listar/funcionario/', FuncionarioList.as_view(), name='listar-funcionario'),
+    path('listar/produto/', ProdutoList.as_view(), name='listar-produto'),
+    path('listar/unidademedida/', UnidadeMedidaList.as_view(), name='listar-unidademedida'),
 ]
