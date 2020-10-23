@@ -21,5 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Importa todas as urls criadas no app páginas
     path('', include('paginas.urls')),
-    path('', include('cadastros.urls'))
+    path('', include('cadastros.urls')),
+    path('', include('usuarios.urls')),
+
 ]

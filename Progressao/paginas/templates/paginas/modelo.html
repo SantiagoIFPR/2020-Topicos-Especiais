@@ -24,7 +24,7 @@
         <div class="container">
             <img src="{% static 'img/logo.png'%}" width="100">
             <a class="navbar-brand text-dark" href="{% url 'index' %}">
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+               &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                 Supermercado Slaviero</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,6 +43,7 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" href="{%url 'diagramas'%}">Diagramas</a>
                     </li>
+                    {% if request.user.is_authenticated %}
                     <li class="nav-item dropdown text-dark">
                         <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Cadastros
@@ -55,6 +56,8 @@
                           <a class="dropdown-item text-dark" href="{% url 'cadastrar-unidademedida' %}">Unidade Medida</a>
                         </div>
                     </li>
+                    {% endif %}
+                    {% if request.user.is_authenticated %}
                     <li class="nav-item dropdown text-dark">
                         <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Listar Cadastros
@@ -67,6 +70,23 @@
                             <a class="dropdown-item text-dark" href="{% url 'listar-unidademedida' %}">Unidade Medida</a>
                         </div>
                     </li>
+                    {% endif %}
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item dropdown text-dark">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          {{ request.user }}
+                        </a>
+                        <div class="dropdown-menu text-dark dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                            <a class="dropdown-item text-dark" href="{% url 'listar-categoria' %}">Meus Dados</a>
+                            <a class="dropdown-item text-dark" href="{% url 'listar-fornecedor' %}">Alterar Senha</a>
+                            <a class="dropdown-item text-dark" href="{% url 'logout' %}">Sair</a>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="{%url 'login'%}">Login</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -274,7 +294,6 @@
     <script src="{% static 'js/popper.js' %}"></script>
     <script src="{% static 'js/jquery.min.js'%}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
 
 </body>
 

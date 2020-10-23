@@ -6,111 +6,133 @@ from .models import Categoria, Fornecedor, Funcionario, Produto, UnidadeMedida
 
 from django.urls import reverse_lazy
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 # Create your views here.
-class CategoriaCreate(CreateView):
+class CategoriaCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
     model = Categoria
     fields = ['nome','descricao']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-categoria')
 
-class UnidadeMedidaCreate(CreateView):
+class UnidadeMedidaCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
     model = UnidadeMedida
     fields = ['nome']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-unidademedida')
 
-class ProdutoCreate(CreateView):
+class ProdutoCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
     model = Produto
     fields = ['nome','descricao','estoque_max','estoque_min','codigo_barras','unidademedida','categoria']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-produto')
 
-class FuncionarioCreate(CreateView):
+class FuncionarioCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
     model = Funcionario
     fields = ['nome_funcionario','setor_funcionario']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-funcionario')
 
-class FornecedorCreate(CreateView):
+class FornecedorCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
     model = Fornecedor
     fields = ['nome','documento','cep','endereco','numero','bairro','cidade','estado','telefone','email']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-fornecedor')    
 
 ########## UPDATES ########## 
-class CategoriaUpdate(UpdateView):
+class CategoriaUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
     model = Categoria
     fields = ['nome','descricao']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-categoria')
 
-class UnidadeMedidaUpdate(UpdateView):
+class UnidadeMedidaUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
     model = UnidadeMedida
     fields = ['nome']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-unidademedida')
 
-class ProdutoUpdate(UpdateView):
+class ProdutoUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
     model = Produto
     fields = ['nome','descricao','estoque_max','estoque_min','codigo_barras','unidademedida','categoria']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-produto')
 
-class FuncionarioUpdate(UpdateView):
+class FuncionarioUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
     model = Funcionario
     fields = ['nome_funcionario','setor_funcionario']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-funcionario')
 
-class FornecedorUpdate(UpdateView):
+class FornecedorUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
     model = Fornecedor
     fields = ['nome','documento','cep','endereco','numero','bairro','cidade','estado','telefone','email']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-fornecedor')  
 
 ########## DELETE ########## 
-class CategoriaDelete(DeleteView):
+class CategoriaDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     model = Categoria
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('listar-categoria')
 
-class UnidadeMedidaDelete(DeleteView):
+class UnidadeMedidaDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     model = UnidadeMedida
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('listar-unidademedida')
 
-class ProdutoDelete(DeleteView):
+class ProdutoDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     model = Produto
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('listar-produto')
 
-class FuncionarioDelete(DeleteView):
+class FuncionarioDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     model = Funcionario
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('listar-funcionario')
 
-class FornecedorDelete(DeleteView):
+class FornecedorDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     model = Fornecedor
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('listar-fornecedor')
 
 ########## LISTA ########## 
-class CategoriaList(ListView):
+class CategoriaList(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
     model = Categoria
     template_name = 'cadastros/listas/categoria.html'
 
-class UnidadeMedidaList(ListView):
+class UnidadeMedidaList(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
     model = UnidadeMedida
     template_name = 'cadastros/listas/unidademedida.html'
 
-class ProdutoList(ListView):
+class ProdutoList(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
     model = Produto
     template_name = 'cadastros/listas/produto.html'
 
-class FuncionarioList(ListView):
+class FuncionarioList(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
     model = Funcionario
     template_name = 'cadastros/listas/funcionario.html'
 
-class FornecedorList(ListView):
+class FornecedorList(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
     model = Fornecedor
     template_name = 'cadastros/listas/fornecedor.html'
