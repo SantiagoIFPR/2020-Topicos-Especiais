@@ -292,8 +292,11 @@
     <!-- A ordem deve ser esta porque ele deve ler primeiro o jQuery-->
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'js/popper.js' %}"></script>
-    <script src="{% static 'js/jquery.min.js'%}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    {% block scripts %}
+
+    {% endblock %}
 
 </body>
 
