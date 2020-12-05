@@ -17,6 +17,7 @@
             <th>Código de Barras</th>
             <th>Unidade Medida</th>
             <th>Categoria</th>
+            <th>Usuário</th>
             <th>Opções</th>
         </tr>
 
@@ -29,6 +30,7 @@
             <td>{{ produto.codigo_barras }}</td>
             <td>{{ produto.unidademedida.nome }}</td>
             <td>{{ produto.categoria.nome }}</td>
+            <td>{{ produto.usuario }}</td>
             <td>
                 <a href="{% url 'editar-produto' produto.pk %}" class="btn btn-warning btn-sm" title="Excluir">Editar</a>
                 <a href="{% url 'excluir-produto' produto.pk%}" class="btn btn-danger btn-sm" title="Editar">Excluir</a>

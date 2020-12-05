@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Categoria(models.Model):
@@ -23,7 +24,9 @@ class Produto(models.Model):
     codigo_barras = models.CharField(max_length=30, verbose_name="Código de Barras")
     unidademedida = models.ForeignKey(UnidadeMedida, on_delete=models.PROTECT)
     categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT)
-    
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
+
+
     def __str__(self):
         return"{} ({})".format(self.nome, self.codigo_barras)
 
@@ -45,6 +48,8 @@ class Fornecedor(models.Model):
     estado = models.CharField(max_length=50)
     telefone = models.CharField(max_length=20)
     email = models.CharField(max_length=200, null=True, blank=True)
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
+
 
     def __str__(self):
         return"{} ({})".format(self.nome, self.documento)

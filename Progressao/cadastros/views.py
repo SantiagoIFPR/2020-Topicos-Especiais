@@ -8,9 +8,12 @@ from django.urls import reverse_lazy
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from braces.views import GroupRequiredMixin
+
 # Create your views here.
-class CategoriaCreate(LoginRequiredMixin, CreateView):
+class CategoriaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
     model = Categoria
     fields = ['nome','descricao']
     template_name = 'cadastros/form.html'
@@ -30,8 +33,19 @@ class ProdutoCreate(LoginRequiredMixin, CreateView):
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-produto')
 
-class FuncionarioCreate(LoginRequiredMixin, CreateView):
+    def form_valid(self, form):
+
+        #Antes do super o meu objeto equipamento ainda não foi criado nem salvo no banco.
+        form.instance.usuario = self.request.user
+
+        url = super().form_valid(form)
+
+        #Depois do super o objeto está criado.
+        return url
+
+class FuncionarioCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
     model = Funcionario
     fields = ['nome_funcionario','setor_funcionario']
     template_name = 'cadastros/form.html'
@@ -42,11 +56,22 @@ class FornecedorCreate(LoginRequiredMixin, CreateView):
     model = Fornecedor
     fields = ['nome','documento','cep','endereco','numero','bairro','cidade','estado','telefone','email']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('listar-fornecedor')    
+    success_url = reverse_lazy('listar-fornecedor')  
+
+    def form_valid(self, form):
+
+        #Antes do super o meu objeto equipamento ainda não foi criado nem salvo no banco.
+        form.instance.usuario = self.request.user
+
+        url = super().form_valid(form)
+
+        #Depois do super o objeto está criado.
+        return url
 
 ########## UPDATES ########## 
-class CategoriaUpdate(LoginRequiredMixin, UpdateView):
+class CategoriaUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
     model = Categoria
     fields = ['nome','descricao']
     template_name = 'cadastros/form.html'
@@ -66,8 +91,9 @@ class ProdutoUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-produto')
 
-class FuncionarioUpdate(LoginRequiredMixin, UpdateView):
+class FuncionarioUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
     model = Funcionario
     fields = ['nome_funcionario','setor_funcionario']
     template_name = 'cadastros/form.html'
@@ -81,8 +107,9 @@ class FornecedorUpdate(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('listar-fornecedor')  
 
 ########## DELETE ########## 
-class CategoriaDelete(LoginRequiredMixin, DeleteView):
+class CategoriaDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
     model = Categoria
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('listar-categoria')
@@ -99,8 +126,9 @@ class ProdutoDelete(LoginRequiredMixin, DeleteView):
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('listar-produto')
 
-class FuncionarioDelete(LoginRequiredMixin, DeleteView):
+class FuncionarioDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
     model = Funcionario
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('listar-funcionario')
@@ -127,6 +155,10 @@ class ProdutoList(LoginRequiredMixin, ListView):
     model = Produto
     template_name = 'cadastros/listas/produto.html'
 
+    def get_queryset(self):
+        self.object_list = Produto.objects.filter(usuario=self.request.user)
+        return self.object_list
+
 class FuncionarioList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Funcionario
@@ -136,3 +168,7 @@ class FornecedorList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Fornecedor
     template_name = 'cadastros/listas/fornecedor.html'
+
+    def get_queryset(self):
+        self.object_list = Fornecedor.objects.filter(usuario=self.request.user)
+        return self.object_list

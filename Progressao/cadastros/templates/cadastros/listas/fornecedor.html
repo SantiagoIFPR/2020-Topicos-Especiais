@@ -20,6 +20,7 @@
             <th>Estado</th>
             <th>Telefone</th>
             <th>E-mail</th>
+            <th>Usuário</th>
             <th>Opções</th>
         </tr>
 
@@ -35,6 +36,7 @@
             <td>{{ fornecedor.estado }}</td>
             <td>{{ fornecedor.telefone }}</td>
             <td>{{ fornecedor.email }}</td>
+            <td>{{ fornecedor.usuario }}</td>
             <td>
                 <a href="{% url 'editar-fornecedor' fornecedor.pk %}" class="btn btn-warning btn-sm" title="Excluir">Editar</a>
                 <a href="{% url 'excluir-fornecedor' fornecedor.pk%}" class="btn btn-danger btn-sm" title="Editar">Excluir</a>
