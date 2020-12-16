@@ -2,34 +2,43 @@
 
 {% load static %}
 
-{% block slide %}
-<p></p><br>
-<h3>Lista de Categorias Cadastradas</h3>
-<a href="{% url 'cadastrar-categoria' %}" class="btn btn-primary btn-sm">Adicionar Categoria</a>
-<hr>
-<div class="table responsive">
-    <table class="table table striped">
-        <tr>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th>Opções</th>
-        </tr>
+{% block lateral1 %} {% endblock %}
 
-        {% for categoria in object_list %} 
-        <tr>
-            <td>{{ categoria.nome }}</td>
-            <td>{{ categoria.descricao }}</td>
-            <td>
-                <a href="{% url 'editar-categoria' categoria.pk %}" class="btn btn-warning btn-sm" title="Excluir">Editar</a>
-                <a href="{% url 'excluir-categoria' categoria.pk%}" class="btn btn-danger btn-sm" title="Editar">Excluir</a>
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="3">Nenhum campo registrado.</td>
-        </tr>
-        {% endfor %}
-    </table>
+{% block slide %}
+<div class="col-lg-12">
+    <p></p><br>
+    <h3>Lista de Categorias Cadastradas</h3>
+    <a href="{% url 'cadastrar-categoria' %}" class="btn btn-primary btn-sm">Adicionar Categoria</a>
+    <hr>
+    <div class="table responsive">
+        <table class="table table striped" id="tabela_categoria">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for categoria in object_list %}
+                <tr>
+                    <td>{{ categoria.nome }}</td>
+                    <td>{{ categoria.descricao }}</td>
+                    <td>
+                        <a href="{% url 'editar-categoria' categoria.pk %}" class="btn btn-warning btn-sm"
+                            title="Excluir">Editar</a>
+                        <a href="{% url 'excluir-categoria' categoria.pk%}" class="btn btn-danger btn-sm"
+                            title="Editar">Excluir</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">Nenhum campo registrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}
 {% block conteudo %}
@@ -37,13 +46,12 @@
 {% endblock %}
 
 {% block scripts %}
-<!-- <script>
-    
+
+<script>
     $(document).ready(function () {
-        
-        alert("Importação ok!");
+        $("#tabela_categoria").DataTable();
 
-    });    
 
-</script> -->
+    });
+</script>
 {% endblock %}

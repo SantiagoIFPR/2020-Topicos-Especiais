@@ -2,54 +2,73 @@
 
 {% load static %}
 
-{% block slide %}
-<p></p><br>
-<h3>Lista de Fornecedores Cadastrados</h3>
-<a href="{% url 'cadastrar-fornecedor' %}" class="btn btn-primary btn-sm">Adicionar Fornecedor</a>
-<hr>
-<div class="table responsive">
-    <table class="table table striped">
-        <tr>
-            <th>Nome</th>
-            <th>Documento</th>
-            <th>CEP</th>
-            <th>Endereço</th>
-            <th>Número</th>
-            <th>Bairro</th>
-            <th>Cidade</th>
-            <th>Estado</th>
-            <th>Telefone</th>
-            <th>E-mail</th>
-            <th>Usuário</th>
-            <th>Opções</th>
-        </tr>
+{% block lateral1 %} {% endblock %}
 
-        {% for fornecedor in object_list %} 
-        <tr>
-            <td>{{ fornecedor.nome }}</td>
-            <td>{{ fornecedor.documento }}</td>
-            <td>{{ fornecedor.cep }}</td>
-            <td>{{ fornecedor.endereco }}</td>
-            <td>{{ fornecedor.numero }}</td>
-            <td>{{ fornecedor.bairro }}</td>
-            <td>{{ fornecedor.cidade }}</td>
-            <td>{{ fornecedor.estado }}</td>
-            <td>{{ fornecedor.telefone }}</td>
-            <td>{{ fornecedor.email }}</td>
-            <td>{{ fornecedor.usuario }}</td>
-            <td>
-                <a href="{% url 'editar-fornecedor' fornecedor.pk %}" class="btn btn-warning btn-sm" title="Excluir">Editar</a>
-                <a href="{% url 'excluir-fornecedor' fornecedor.pk%}" class="btn btn-danger btn-sm" title="Editar">Excluir</a>
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="3">Nenhum campo registrado.</td>
-        </tr>
-        {% endfor %}
-    </table>
+{% block slide %}
+<div class="col-lg-12">
+    <p></p><br>
+    <h3>Lista de Fornecedores Cadastrados</h3>
+    <a href="{% url 'cadastrar-fornecedor' %}" class="btn btn-primary btn-sm">Adicionar Fornecedor</a>
+    <hr>
+    <div class="table responsive">
+        <table class="table table striped" id="tabela_fornecedor">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Documento</th>
+                    <th>CEP</th>
+                    <th>Endereço</th>
+                    <th>Número</th>
+                    <th>Bairro</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>Telefone</th>
+                    <th>E-mail</th>
+                    <th>Usuário</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fornecedor in object_list %}
+                <tr>
+                    <td>{{ fornecedor.nome }}</td>
+                    <td>{{ fornecedor.documento }}</td>
+                    <td>{{ fornecedor.cep }}</td>
+                    <td>{{ fornecedor.endereco }}</td>
+                    <td>{{ fornecedor.numero }}</td>
+                    <td>{{ fornecedor.bairro }}</td>
+                    <td>{{ fornecedor.cidade }}</td>
+                    <td>{{ fornecedor.estado }}</td>
+                    <td>{{ fornecedor.telefone }}</td>
+                    <td>{{ fornecedor.email }}</td>
+                    <td>{{ fornecedor.usuario }}</td>
+                    <td>
+                        <a href="{% url 'editar-fornecedor' fornecedor.pk %}" class="btn btn-warning btn-sm"
+                            title="Excluir">Editar</a>
+                        <a href="{% url 'excluir-fornecedor' fornecedor.pk%}" class="btn btn-danger btn-sm"
+                            title="Editar">Excluir</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">Nenhum campo registrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}
 {% block conteudo %}
 <p></p>
+{% endblock %}
+{% block scripts %}
+
+<script>
+    $(document).ready(function () {
+        $("#tabela_fornecedor").DataTable();
+
+
+    });
+</script>
 {% endblock %}
